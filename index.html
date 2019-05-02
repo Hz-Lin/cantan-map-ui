@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<header>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Cantan Map Generator</title>
+
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <!-- <script src="main.js"></script> -->
+</header>
+
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Catan Map Generator!</h1>
+
+            <p class="lead">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button id="readJsonButton" type="button" class="btn btn-info">Get JSON Info</button>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <div class="defaut_map">
+        <svg class="chart" width="1500" height="1000">
+            
+            <!-- define the picture of the tiles -->
+            <defs>
+                <pattern id="desert" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/desert.jpg" />
+                </pattern>
+                <pattern id="field" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/field.jpg" />
+                </pattern>
+                <pattern id="forest" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/forest.jpg" />
+                </pattern>
+                <pattern id="mountain" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/mountain.jpg" />
+                </pattern>
+                <pattern id="pasture" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/pasture.jpg" />
+                </pattern>
+                <pattern id="river" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/river.jpg" />
+                </pattern>
+
+            </defs>
+
+            <!-- place the tiles -->
+            <!-- first row-->
+            <g class="tile" transform="translate(259.8, 100)">
+                <polygon id="a0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(433.0, 100)">
+                <polygon id="a1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(606.2, 100)">
+                <polygon id="a2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <!-- second row-->
+            <g class="tile" transform="translate(173.2, 250)">
+                <polygon id="b0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(346.4, 250)">
+                <polygon id="b1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(519.6, 250)">
+                <polygon id="b2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(692.8, 250)">
+                <polygon id="b3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <!-- third row-->
+            <g class="tile" transform="translate(86.6, 400)">
+                <polygon id="c0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(259.8, 400)">
+                <polygon id="c1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(433.0, 400)">
+                <polygon id="c2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(606.2, 400)">
+                <polygon id="c3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(779.4, 400)">
+                <polygon id="c4" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <!-- fourth row-->
+            <g class="tile" transform="translate(173.2, 550)">
+                <polygon id="d0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(346.4, 550)">
+                <polygon id="d1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(519.6, 550)">
+                <polygon id="d2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(692.8, 550)">
+                <polygon id="d3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <!-- fifth row-->
+            <g class="tile" transform="translate(259.8, 700)">
+                <polygon id="e0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(433.0, 700)">
+                <polygon id="e1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+            <g class="tile" transform="translate(606.2, 700)">
+                <polygon id="e2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                </polygon>
+            </g>
+
+            <!-- place the circles for numbers -->
+            <!-- first row-->
+            <g class="numslot" transform="translate(259.8, 100)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="na0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(433, 100)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="na1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(606.2, 100)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="na2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <!-- second row-->
+            <g class="numslot" transform="translate(173.2, 250)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nb0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(346.4, 250)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nb1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(519.6, 250)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nb2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(692.8, 250)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nb3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <!-- third row-->
+            <g class="numslot" transform="translate(86.6, 400)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nc0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(259.8, 400)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nc1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(433, 400)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nc2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(606.2, 400)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nc3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(779.4, 400)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nc4" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <!-- fourth row-->
+            <g class="numslot" transform="translate(173.2, 550)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nd0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(346.4, 550)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nd1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(519.6, 550)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nd2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(692.8, 550)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="nd3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <!-- fifth row-->
+            <g class="numslot" transform="translate(259.8, 700)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="ne0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(433, 700)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="ne1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+            <g class="numslot" transform="translate(606.2, 700)">
+                <circle cx="259.8" cy="100" r="30" fill="bisque" />
+                <text id="ne2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+            </g>
+        </svg>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" ></script>
+    <script src="main.js" ></script>
+</body>
