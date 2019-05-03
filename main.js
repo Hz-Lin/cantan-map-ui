@@ -2,7 +2,7 @@ $( "#sendAlertButton" ).click(function() {
     alert( "Handler for .click() called." );
 });
 
-$( "#readJsonButton" ).click(function() {
+$( "#generateMap4Button" ).click(function() {
     console.log("Reading JSON");
 
     var settings = {
@@ -22,24 +22,55 @@ $( "#readJsonButton" ).click(function() {
         console.log(response);
         console.log(response.GameType);
         console.log(response.Board);
-        drawMap(response.Board);
+        drawMap(response.GameType, response.Board);
     });
 
 });
 
+$( "#generateMap6Button" ).click(function() {
+    console.log("Reading JSON");
 
-function drawMap(data) {
-    lineIndicators = ["a","b","c","d","e"];
+    var settings = {
+        'cache': false,
+        'dataType': "jsonp",
+        "async": true,
+        "crossDomain": true,
+        "url": "https://catan-map-generator.herokuapp.com/api/map?type=large&max=365&min=156&minr=65&maxr=140&max300=22&jsonp=true",
+        "method": "GET",
+        "headers": {
+            "accept": "application/json",
+            "Access-Control-Allow-Origin":"*"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        console.log(response.GameType);
+        console.log(response.Board);
+        drawMap(response.GameType, response.Board);
+    });
+
+});
+
+function drawMap(type,data) {
+    if (type === "Normal") {
+        lineIndicators = ["a","b","c","d","e"];
+        idPrefix = "s";
+    } else {
+        lineIndicators = ["a","b","c","d","e","f","g"];
+        idPrefix = "l";
+    };
     for (var i in lineIndicators) {
         indicator = lineIndicators[i];
         console.log("this is the line indicator: " + data[indicator]);
         for (var j = 0; j < data[indicator].length; j++) {
-            var polygonId = indicator + j;
+            var polygonId = idPrefix + indicator + j;
             var landscapeType = data[indicator][j].Landscape;
-            var numberId = "n" + polygonId;
+            var numberId = idPrefix + "n" + indicator + j;
             var numberValue = data[indicator][j].Number.Number;
             console.log(polygonId);
             console.log(landscapeType);
+            console.log(numberId);
             updatePolygon(polygonId,landscapeType);
             updateNumber(numberId,numberValue)
         }
