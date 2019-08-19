@@ -22,6 +22,7 @@ $( "#generateMap4Button" ).click(function() {
         console.log(response);
         console.log(response.GameType);
         console.log(response.Board);
+        updateGamecode(response.GameCode, response.GameType);
         drawMap(response.GameType, response.Board);
     });
 
@@ -47,6 +48,7 @@ $( "#generateMap6Button" ).click(function() {
         console.log(response);
         console.log(response.GameType);
         console.log(response.Board);
+        updateGamecode(response.GameCode, response.GameType);
         drawMap(response.GameType, response.Board);
     });
 
@@ -65,7 +67,7 @@ function drawMap(type,data) {
         console.log("this is the line indicator: " + data[indicator]);
         for (var j = 0; j < data[indicator].length; j++) {
             var polygonId = idPrefix + indicator + j;
-            var landscapeType = data[indicator][j].Landscape;
+            var landscapeType = data[indicator][j].Landscape.Name.toLowerCase();
             var numberId = idPrefix + "n" + indicator + j;
             var numberValue = data[indicator][j].Number.Number;
             console.log(polygonId);
@@ -84,22 +86,14 @@ function updatePolygon(polygonId,landscapeType) {
 }
 
 function getFillForLandscapeType(landscapeType) {
-    switch(landscapeType) {
-        case 0: return "url(#desert)";
-        break;
-        case 1: return "url(#forest)";
-        break;
-        case 2: return "url(#pasture)";
-        break;
-        case 3: return "url(#field)";
-        break;
-        case 4: return "url(#river)";
-        break;
-        case 5: return "url(#mountain)";
-        break;
-    }
+    return "url(#"+landscapeType+")";
 }
 
 function updateNumber(numberId,numberValue) {
     $("#"+numberId).text(numberValue);
 }
+
+function updateGamecode(gameCode, gameType) {
+    $('div.gameCode'+gameType+' .value').text(gameCode);
+}
+
