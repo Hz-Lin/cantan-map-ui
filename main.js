@@ -1,5 +1,41 @@
+
+var $loading = $('#loadingDiv').hide();
+$(document)
+    .ajaxStart(function () {
+        $loading.show();
+    })
+    .ajaxStop(function () {
+        $loading.hide();
+    });
+
 $( "#sendAlertButton" ).click(function() {
     alert( "Handler for .click() called." );
+});
+
+$( "#generateMapCodeButton" ).click(function() {
+    code = $('#gameCodeInput').val();
+    console.log("Code: ", code)
+    var settings = {
+        'cache': false,
+        'dataType': "jsonp",
+        "async": true,
+        "crossDomain": true,
+        "url": "https://catan-map-generator.herokuapp.com/api/map/code/"+code+"?jsonp=true",
+        "method": "GET",
+        "headers": {
+            "accept": "application/json",
+            "Access-Control-Allow-Origin":"*"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        console.log(response.GameType);
+        console.log(response.Board);
+        updateGamecode(response.GameCode, response.GameType);
+        drawMap(response.GameType, response.Board);
+    });
+
 });
 
 $( "#generateMap4Button" ).click(function() {
