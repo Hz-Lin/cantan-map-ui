@@ -20,7 +20,7 @@ $( "#generateMapCodeButton" ).click(function() {
         'dataType': "jsonp",
         "async": true,
         "crossDomain": true,
-        "url": "https://catan-map-generator.herokuapp.com/api/v1/map/code/"+code+"?jsonp=true",
+        "url": "https://catan-map-generator.herokuapp.com/api/map/code/"+code+"?jsonp=true",
         "method": "GET",
         "headers": {
             "accept": "application/json",
@@ -46,7 +46,7 @@ $( "#generateMap4Button" ).click(function() {
         'dataType': "jsonp",
         "async": true,
         "crossDomain": true,
-        "url": "https://catan-map-generator.herokuapp.com/api/map?jsonp=true",
+        "url": "https://catan-map-generator.herokuapp.com/api/v1/map?jsonp=true",
         "method": "GET",
         "headers": {
             "accept": "application/json",
