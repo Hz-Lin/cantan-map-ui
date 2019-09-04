@@ -16,511 +16,511 @@
 
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron">
         <div class="container">
-            <h1 class="display-4">Catan Map Generator!</h1>
+            <h3 >Catan Map Generator!</h3>
 
             <p class="lead">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button id="sendAlertButton" type="button" class="btn btn-warning">Warning</button>
-                    </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button id="generateMap4Button" type="button" class="btn btn-info">Generate Normal Map (4 players)</button>
+                        <button id="generateMap4Button" type="button" class="btn btn-primary">Generate Normal Map (4 players)</button>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Third group">
                         <button id="generateMap6Button" type="button" class="btn btn-info">Generate Map with Expansion (>5 players)</button>
                     </div>
+
                 </div>
             </p>
+            <p>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <button id="generateMapCodeButton" type="button" class="btn btn-outline-primary">Generate Map Via Code</button>
+                </div>
+                <input type="text"  class="form-control" placeholder="" aria-label="Game Code" aria-describedby="basic-addon2" id="gameCodeInput">
+            </div>
+            </p>
+            <div id="loadingDiv" class="alert alert-warning" role="alert">
+                Loading...
+            </div>
         </div>
     </div>
 
-    <div class="gameCodeNormal">
-        <p>Game Code:</p>
-        <p class="value"></p>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="gameCodeNormal card text-center" >
+                <div class="card-header">
+                    Game Code (4P):
+                </div>
+                <div class="card-body">
+                    <p class="value"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card text-center">
+                <div class="card-header">
+                    4 Player Map
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="normal_map">
+    <div class="normal_map" id="4pchart" class="collapse">
         <svg class="chart" width="1500" height="1500">
             
             <!-- define the picture of the tiles -->
             <defs>
-                <pattern id="desert" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/desert.jpg" />
+                <pattern id="desert" height="100%" width="100%"  patternContentUnits="objectBoundingBox">
+                    <image height="1" width="1" preserveAspectRatio="none" href="https://catanmapimages.s3.eu-central-1.amazonaws.com/desert.jpg" />
                 </pattern>
                 <pattern id="field" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/field.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" href="https://catanmapimages.s3.eu-central-1.amazonaws.com/field.jpg" />
                 </pattern>
                 <pattern id="forest" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/forest.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" href="https://catanmapimages.s3.eu-central-1.amazonaws.com/forest.jpg" />
                 </pattern>
                 <pattern id="mountain" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/mountain.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" href="https://catanmapimages.s3.eu-central-1.amazonaws.com/mountain.jpg" />
                 </pattern>
                 <pattern id="pasture" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/pasture.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" href="https://catanmapimages.s3.eu-central-1.amazonaws.com/pasture.jpg" />
                 </pattern>
                 <pattern id="hill" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/river.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" href="https://catanmapimages.s3.eu-central-1.amazonaws.com/river.jpg" />
                 </pattern>
+                <g>
+                    <polygon id="tile" points="260,0 346,50 346,150 260,200 173,150 173,50 " />
+                </g>
+                <patter id="numberCircle">
+                    <circle cx="260" cy="100" r="30" fill="bisque" />
+                    <text  x="260" y="100" text-anchor="middle" dy="0.3em"></text>
+                </patter>
             </defs>
 
             <!-- place the tiles -->
             <!-- first row-->
-            <g class="tile" transform="translate(346.4, 100)">
-                <polygon id="sa0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(519.6, 100)">
-                <polygon id="sa1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(692.8, 100)">
-                <polygon id="sa2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
+            <g id="firstRow" class="tile">
+                <use id="sa0" xlink:href="#tile" transform="translate(346.4, 100)"/>
+                <use id="sa1" xlink:href="#tile" transform="translate(519.6, 100)"/>
+                <use id="sa2" xlink:href="#tile" transform="translate(692.8, 100)"/>
             </g>
             <!-- second row-->
-            <g class="tile" transform="translate(259.8, 250)">
-                <polygon id="sb0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(433, 250)">
-                <polygon id="sb1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(606.2, 250)">
-                <polygon id="sb2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(779.4, 250)">
-                <polygon id="sb3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
+            <g id="secondRow" class="tile">
+                <use id="sb0" xlink:href="#tile" transform="translate(259.8, 250)"/>
+                <use id="sb1" xlink:href="#tile" transform="translate(433, 250)"/>
+                <use id="sb2" xlink:href="#tile" transform="translate(606.2, 250)"/>
+                <use id="sb3" xlink:href="#tile" transform="translate(779.4, 250)"/>
             </g>
             <!-- third row-->
-            <g class="tile" transform="translate(173.2, 400)">
-                <polygon id="sc0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(346.4, 400)">
-                <polygon id="sc1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(519.6, 400)">
-                <polygon id="sc2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(692.8, 400)">
-                <polygon id="sc3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(866, 400)">
-                <polygon id="sc4" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
+            <g id="thirdRow" class="tile">
+                <use id="sc0" xlink:href="#tile" transform="translate(173.2, 400)"/>
+                <use id="sc1" xlink:href="#tile" transform="translate(346.4, 400)"/>
+                <use id="sc2" xlink:href="#tile" transform="translate(519.6, 400)"/>
+                <use id="sc3" xlink:href="#tile" transform="translate(692.8, 400)"/>
+                <use id="sc4" xlink:href="#tile" transform="translate(866, 400)"/>
             </g>
             <!-- fourth row-->
-            <g class="tile" transform="translate(259.8, 550)">
-                <polygon id="sd0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(433, 550)">
-                <polygon id="sd1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(606.2, 550)">
-                <polygon id="sd2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(779.4, 550)">
-                <polygon id="sd3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
+            <g id="fourthRow" class="tile">
+                <use id="sd0" xlink:href="#tile" transform="translate(259.8, 550)"/>
+                <use id="sd1" xlink:href="#tile" transform="translate(433, 550)"/>
+                <use id="sd2" xlink:href="#tile" transform="translate(606.2, 550)"/>
+                <use id="sd3" xlink:href="#tile" transform="translate(779.4, 550)"/>
             </g>
             <!-- fifth row-->
-            <g class="tile" transform="translate(346.4, 700)">
-                <polygon id="se0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(519.6, 700)">
-                <polygon id="se1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
-            </g>
-            <g class="tile" transform="translate(692.8, 700)">
-                <polygon id="se2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
-                </polygon>
+            <g id="fifthRow" class="tile">
+                <use id="se0" xlink:href="#tile" transform="translate(346.4, 700)"/>
+                <use id="se1" xlink:href="#tile" transform="translate(519.6, 700)"/>
+                <use id="se2" xlink:href="#tile" transform="translate(692.8, 700)"/>
             </g>
 
             <!-- place the circles for numbers -->
             <!-- first row-->
             <g class="numslot" transform="translate(346.4, 100)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="sna0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="sna0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 100)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="sna1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="sna1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 100)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="sna2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="sna2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- second row-->
             <g class="numslot" transform="translate(259.8, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snb0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snb0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(433, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snb1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snb1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(606.2, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snb2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snb2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(779.4, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snb3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snb3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- third row-->
             <g class="numslot" transform="translate(173.2, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snc0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snc0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(346.4, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snc1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snc1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snc2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snc2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snc3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snc3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(866, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snc4" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snc4" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- fourth row-->
             <g class="numslot" transform="translate(259.8, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snd0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snd0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(433, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snd1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snd1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(606.2, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snd2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snd2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(779.4, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="snd3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="snd3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- fifth row-->
             <g class="numslot" transform="translate(346.4, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="sne0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="sne0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="sne1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="sne1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="sne2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="sne2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
         </svg>
     </div>
 
 
-    <div class="gameCodeLarge">
-            <p>Game Code:</p>
-            <p class="value"></p>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="gameCodeLarge card text-center" >
+                <div class="card-header">
+                    Game Code (6P):
+                </div>
+                <div class="card-body">
+                    <p class="value"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card text-center">
+                <div class="card-header">
+                    6 Player Map
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="large_map">
+    <div class="large_map" id="6pchart" class="collapse">
         <svg class="chart" width="1500" height="1500">
                 
         <!-- define the picture of the tiles -->
             <defs>
                 <pattern id="desert" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/desert.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="https://catanmapimages.s3.eu-central-1.amazonaws.com/desert.jpg" />
                 </pattern>
                 <pattern id="field" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/field.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="https://catanmapimages.s3.eu-central-1.amazonaws.com/field.jpg" />
                 </pattern>
                 <pattern id="forest" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/forest.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="https://catanmapimages.s3.eu-central-1.amazonaws.com/forest.jpg" />
                 </pattern>
                 <pattern id="mountain" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/mountain.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="https://catanmapimages.s3.eu-central-1.amazonaws.com/mountain.jpg" />
                 </pattern>
                 <pattern id="pasture" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/pasture.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="https://catanmapimages.s3.eu-central-1.amazonaws.com/pasture.jpg" />
                 </pattern>
                 <pattern id="river" height="100%" width="100%" patternContentUnits="objectBoundingBox">
-                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="img/lite/river.jpg" />
+                    <image height="1" width="1" preserveAspectRatio="none" xlink:href="https://catanmapimages.s3.eu-central-1.amazonaws.com/river.jpg" />
                 </pattern>
             </defs>
             
             <!-- place the tiles -->
             <!-- first row-->
             <g class="tile" transform="translate(346.4, 100)">
-                <polygon id="la0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="la0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(519.6, 100)">
-                <polygon id="la1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="la1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(692.8, 100)">
-                <polygon id="la2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="la2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <!-- second row-->
             <g class="tile" transform="translate(259.8, 250)">
-                <polygon id="lb0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lb0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(433, 250)">
-                <polygon id="lb1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lb1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(606.2, 250)">
-                <polygon id="lb2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lb2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(779.4, 250)">
-                <polygon id="lb3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lb3" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <!-- third row-->
             <g class="tile" transform="translate(173.2, 400)">
-                <polygon id="lc0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lc0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(346.4, 400)">
-                <polygon id="lc1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lc1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(519.6, 400)">
-                <polygon id="lc2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lc2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(692.8, 400)">
-                <polygon id="lc3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lc3" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(866, 400)">
-                <polygon id="lc4" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lc4" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <!-- fourth row-->
             <g class="tile" transform="translate(86.6, 550)">
-                <polygon id="ld0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="ld0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(259.8, 550)">
-                <polygon id="ld1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="ld1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(433, 550)">
-                <polygon id="ld2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="ld2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(606.2, 550)">
-                <polygon id="ld3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="ld3" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(779.4, 550)">
-                <polygon id="ld4" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="ld4" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(952.6, 550)">
-                <polygon id="ld5" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="ld5" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <!-- fifth row-->
             <g class="tile" transform="translate(173.2, 700)">
-                <polygon id="le0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="le0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(346.4, 700)">
-                <polygon id="le1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="le1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
             </polygon>
             </g>
             <g class="tile" transform="translate(519.6, 700)">
-                <polygon id="le2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="le2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(692.8, 700)">
-                <polygon id="le3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="le3" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(866, 700)">
-                <polygon id="le4" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="le4" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <!-- sixth row-->
             <g class="tile" transform="translate(259.8, 850)">
-                <polygon id="lf0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lf0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(433, 850)">
-                <polygon id="lf1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lf1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(606.2, 850)">
-                <polygon id="lf2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lf2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(779.4, 850)">
-                <polygon id="lf3" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lf3" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <!-- seventh row-->
             <g class="tile" transform="translate(346.4, 1000)">
-                <polygon id="lg0" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lg0" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(519.6, 1000)">
-                <polygon id="lg1" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lg1" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             <g class="tile" transform="translate(692.8, 1000)">
-                <polygon id="lg2" points="259.8,0 346.4,50 346.4,150 259.8,200 173.2,150 173.2,50 ">
+                <polygon id="lg2" points="260,0 346,50 346,150 260,200 173,150 173,50 ">
                 </polygon>
             </g>
             
             <!-- place the circles for numbers -->
             <!-- first row-->
             <g class="numslot" transform="translate(346.4, 100)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lna0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lna0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 100)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lna1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lna1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 100)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lna2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lna2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- second row-->
             <g class="numslot" transform="translate(259.8, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnb0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnb0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(433, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnb1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnb1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(606.2, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnb2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnb2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(779.4, 250)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnb3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnb3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- third row-->
             <g class="numslot" transform="translate(173.2, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnc0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnc0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(346.4, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnc1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnc1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnc2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnc2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnc3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnc3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(866, 400)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnc4" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnc4" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- fourth row-->
             <g class="numslot" transform="translate(86.6, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnd0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnd0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(259.8, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnd1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnd1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(433, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnd2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnd2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(606.2, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnd3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnd3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(779.4, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnd4" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnd4" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(952.6, 550)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnd5" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnd5" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- fifth row-->
             <g class="numslot" transform="translate(173.2, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lne0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lne0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(346.4, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lne1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lne1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lne2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lne2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lne3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lne3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(866, 700)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lne4" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lne4" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- sixth row-->
             <g class="numslot" transform="translate(259.8, 850)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnf0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnf0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(433, 850)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnf1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnf1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(606.2, 850)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnf2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnf2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(779.4, 850)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lnf3" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lnf3" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <!-- seventh row-->
             <g class="numslot" transform="translate(346.4, 1000)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lng0" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lng0" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(519.6, 1000)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lng1" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lng1" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>
             <g class="numslot" transform="translate(692.8, 1000)">
-                <circle cx="259.8" cy="100" r="30" fill="bisque" />
-                <text id="lng2" x="259.8" y="100" text-anchor="middle" dy="0.3em"></text>
+                <circle cx="260" cy="100" r="30" fill="bisque" />
+                <text id="lng2" x="260" y="100" text-anchor="middle" dy="0.3em"></text>
             </g>                            
         </svg>
     </div>
